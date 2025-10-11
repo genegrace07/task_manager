@@ -7,6 +7,6 @@ db = mysql.connector.connect(
     database = "task_list"
 )
 dbcursor = db.cursor(dictionary=True)
-dbcursor.execute('show tables')
+dbcursor.execute('select * from tasks order by date_time')
 show = dbcursor.fetchall()
 print(show)

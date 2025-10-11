@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <center>
+
+<h2>UPDATE TASK</h2><br>
+        <form action="/update/{{ task_get['id'] }}" method="POST">
+            <input type="text" name="content" id="content" value="{{ task_get['tasks'] }}">
+            <input type="submit" value="UPDATE">
+        </form>
+
+    </center>
+
+{% endblock %}

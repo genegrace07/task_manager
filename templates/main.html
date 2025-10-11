@@ -1,7 +1,25 @@
 {% extends "base.html" %}
 
 {% block body %}
+    <center>
 
-<h1>THIS IS THE MAIN PAGE</h1>
+<h2>TASK MANAGER</h2>
+        <table style="background-color:black" width="350">
+            <tr style="background-color:#89CFF0">
+                <th>TASKS</th><th>DATE</th><th>ACTION</th>
+            </tr>
+            {% for x in view_list %}
+            <tr style="background-color:#89CFF0">
+                <td>{{ x["tasks"] }}</td><td></td>
+                <td align="center"><a href="/update/{{x['id']}}">UPDATE<br></a><a href="/delete/{{x['id']}}">DELETE</a></td>
+            </tr>
+            {% endfor %}
+        </table><br>
+        <form action="/" method="POST">
+            <input type="text" name="content" id="content" placeholder="enter your task here">
+            <input type="submit" value="ADD TASK">
+        </form>
+
+    </center>
 
 {% endblock %}
