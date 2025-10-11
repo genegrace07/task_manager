@@ -4,13 +4,13 @@
     <center>
 
 <h2>TASK MANAGER</h2>
-        <table style="background-color:black" width="350">
+        <table style="background-color:black" width="500">
             <tr style="background-color:#89CFF0">
                 <th>TASKS</th><th>DATE</th><th>ACTION</th>
             </tr>
             {% for x in view_list %}
             <tr style="background-color:#89CFF0">
-                <td>{{ x["tasks"] }}</td><td></td>
+                <td>{{ x["tasks"] }}</td><td>{{ x["date_time"] }}</td>
                 <td align="center"><a href="/update/{{x['id']}}">UPDATE<br></a><a href="/delete/{{x['id']}}">DELETE</a></td>
             </tr>
             {% endfor %}
