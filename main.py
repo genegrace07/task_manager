@@ -28,3 +28,15 @@ def update_route(no):
 
 if __name__ == "__main__":
     app.run(debug=True)
+    
+
+'''
+no task disply
+add go back button
+change to .get
+.env
+user login
+blueprint
+flash
+encrypt pass
+'''
