@@ -16,8 +16,16 @@ def home():
         view_list = taskdb.display_list()
         return render_template('main.html',view_list=view_list)
 
+@app.route('/sign')
+def signup():
+    return render_template('signup.html')
+@app.route('/log')
+def login():
+    return render_template('login.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 '''
 user login
