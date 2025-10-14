@@ -1,6 +1,7 @@
 from flask import Blueprint,url_for,request,redirect,render_template
-import taskdb
+from taskdb import TaskDB
 
+taskdb = TaskDB()
 modify = Blueprint('modify',__name__)
 
 @modify.route('/delete/<int:no>')

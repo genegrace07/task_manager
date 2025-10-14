@@ -11,7 +11,7 @@
             {% for x in view_list %}
             <tr style="background-color:white">
                 <td>{{ x["tasks"] }}</td><td align="center">{{ x["date_time"] }}</td>
-                <td align="center"><a href="/update/{{x['id']}}">UPDATE<br></a><a href="/delete/{{x['id']}}">DELETE</a></td>
+                <td align="center"><a href= "{{ url_for('modify.update_route',no=x['id']) }}">UPDATE<br></a><a href="{{ url_for('modify.del_route',no=x['id']) }}">DELETE</a></td>
             </tr>
             {% endfor %}
         </table><br>
