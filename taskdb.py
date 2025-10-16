@@ -33,3 +33,9 @@ class TaskDB:
         c_value = ('update tasks set tasks = %s where id = %s')
         self.dbcursor.execute(c_value,(task_name,no))
         self.db.commit()
+
+class UserDB(TaskDB):
+    def signing(self,user_name,passwd):
+        c_value = ('insert into auth(username,pwd) values(%s,%s)')
+        self.dbcursor.execute(c_value,(user_name,passwd))
+        self.db.commit()

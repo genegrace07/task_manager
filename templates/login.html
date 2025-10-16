@@ -3,13 +3,17 @@
 {% block body %}
 
 <center style="color:white">
+    <h2>TASK MANAGER</h2>
+    <br>
    <h1>Log in</h1>
-<form action="" method="POST">
+<form action="/log" method="POST">
     <input type="email" name="content" value="" placeholder=" Email" ><br>
     Email<br>
     <input type="password" name="content" value="" placeholder=" Password"><br>
     Password
 </form>
+<br>
+    <a href="/sign"><h3 style="color:white">Create account</h3></a>
 </center>
 
 {% endblock %}

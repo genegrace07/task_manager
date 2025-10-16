@@ -1,10 +1,11 @@
 from flask import Flask,request,redirect,render_template,url_for
-from taskdb import TaskDB
+from taskdb import TaskDB, UserDB
 from modify import modify
 from auth import auth
 
 app = Flask(__name__)
 app.config['taskdb'] = TaskDB()
+app.config['taskdb'] = UserDB()
 
 app.register_blueprint(modify, url_prefix='/')
 app.register_blueprint(auth, url_prefix='/')
