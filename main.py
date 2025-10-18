@@ -5,18 +5,18 @@ from auth import auth
 
 app = Flask(__name__)
 app.config['taskdb'] = TaskDB()
-app.config['taskdb'] = UserDB()
+app.config['userdb'] = UserDB()
 
 app.register_blueprint(modify, url_prefix='/')
 app.register_blueprint(auth, url_prefix='/')
 
-@app.route('/',methods=['POST','GET'])
-def home():
+@app.route('/task',methods=['POST','GET'])
+def task():
     t_db = app.config['taskdb']
     if request.method == "POST":
         enter_task = request.form.get('content')
         t_db.add_list(enter_task)
-        return redirect(url_for('home'))
+        return redirect(url_for('task'))
     else:
         view_list = t_db.display_list()
         return render_template('main.html',view_list=view_list)
@@ -27,7 +27,6 @@ if __name__ == "__main__":
 
 
 '''
-user login
 flash
 encrypt pass
 '''

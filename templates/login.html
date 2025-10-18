@@ -6,14 +6,16 @@
     <h2>TASK MANAGER</h2>
     <br>
    <h1>Log in</h1>
-<form action="/log" method="POST">
-    <input type="email" name="content" value="" placeholder=" Email" ><br>
+<form action="{{ url_for('auth.login') }}" method="POST">
+    <input type="email" name="email" value="" placeholder=" Email" style="width:250px;height:30px;border-radius:10px;"><br>
     Email<br>
-    <input type="password" name="content" value="" placeholder=" Password"><br>
-    Password
+    <input type="password" name="password" value="" placeholder=" Password" style="width:250px;height:30px;border-radius:10px;">
+    <br>Password<br>
+    <input type="submit" value="Login" style="width:250px;height:30px;border-radius:10px;">
 </form>
 <br>
-    <a href="/sign"><h3 style="color:white">Create account</h3></a>
+    <a href="/sign"><h3 style="color:white">Create account</h3></a></br>
+
 </center>
 
 {% endblock %}
