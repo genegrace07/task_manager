@@ -10,9 +10,21 @@ def signup():
     if request.method == 'POST':
         get_email = request.form.get('email')
         get_pass = request.form.get('password')
-        hash_password = generate_password_hash(get_pass)
-        t_db.signing(get_email,hash_password)
-        return redirect(url_for('auth.signup'))
+        get_confirm = request.form.get('confirm')
+        if len(get_email) == 0:
+            flash('Email cannot be empty','error')
+            return redirect(url_for('auth.signup'))
+        elif len(get_pass) == 0:
+            flash('Password cannot be empty','error')
+            return redirect(url_for('auth.signup'))
+        elif get_pass != get_confirm:
+            flash('Password not match','error')
+            return redirect(url_for('auth.signup'))
+        else:
+            hash_password = generate_password_hash(get_pass)
+            t_db.signing(get_email,hash_password)
+            flash('Successfully registered', 'success')
+            return redirect(url_for('auth.signup'))
     else:
         return render_template('signup.html')
 

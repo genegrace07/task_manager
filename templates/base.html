@@ -15,11 +15,11 @@
 {% for category, msg in msgs %}
     {% if category == "success" %}
         <center>
-        <div style="background-color:green; color:white; width:500px;">{{msg}}</div>
+            <div style="background-color:green; color:white; width:500px;"><h3>{{msg}}</h3></div>
         </center>
     {% elif category == "error" %}
         <center>
-        <div style="background-color:red; color:white; width:500px;">{{msg}}</div>
+            <div style="background-color:red; color:white; width:500px;"><h3>{{msg}}</h3></div>
         </center>
 {% endif %}
 {% endfor %}
