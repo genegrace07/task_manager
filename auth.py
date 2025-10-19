@@ -1,5 +1,6 @@
-from flask import Flask,request,redirect,render_template,url_for,Blueprint,current_app
+from flask import Flask,request,redirect,render_template,url_for,Blueprint,current_app,flash
 from taskdb import UserDB
+from werkzeug.security import generate_password_hash,check_password_hash
 
 auth = Blueprint('auth',__name__)
 
@@ -9,7 +10,8 @@ def signup():
     if request.method == 'POST':
         get_email = request.form.get('email')
         get_pass = request.form.get('password')
-        t_db.signing(get_email,get_pass)
+        hash_password = generate_password_hash(get_pass)
+        t_db.signing(get_email,hash_password)
         return redirect(url_for('auth.signup'))
     else:
         return render_template('signup.html')
@@ -20,8 +22,14 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-        t_db.log_in(email,password)
-        return redirect(url_for('task'))
+
+        user = t_db.get_email(email)
+        if user and check_password_hash(user['pwd'],password):
+            flash('login successfully','success')
+            return redirect(url_for('task'))
+        else:
+            flash('Invalid login','error')
+            return render_template('login.html')
     else:
         return render_template('login.html')
 

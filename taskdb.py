@@ -39,7 +39,12 @@ class UserDB(TaskDB):
         c_value = ('insert into auth(username,pwd) values(%s,%s)')
         self.dbcursor.execute(c_value,(user_name,passwd))
         self.db.commit()
-    def log_in(self,email,password):
-        c_value = 'select * from auth where username = %s and pwd = %s'
-        self.dbcursor.execute(c_value,(email,password))
-        self.dbcursor.fetchone()
+    def get_email(self,email):
+        c_value = 'select * from auth where username = %s'
+        self.dbcursor.execute(c_value,(email,))
+        return self.dbcursor.fetchone()
+
+    # def log_in(self,email,password):
+    #     c_value = 'select * from auth where username = %s and pwd = %s'
+    #     self.dbcursor.execute(c_value,(email,password))
+    #     return self.dbcursor.fetchone()

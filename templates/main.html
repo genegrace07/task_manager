@@ -1,5 +1,21 @@
 {% extends "base.html" %}
 
+{% block head %}
+<meta http-equiv="refresh" content="10">
+{% endblock %}
+
+<!--{% with msgs = get_flashed_messages(with_categories=true) %}-->
+<!--{% if msgs %}-->
+<!--{% for category, msg in msgs %}-->
+<!--    {% if category == "success" %}-->
+<!--        <center>-->
+<!--        <div style="background-color:green; color:white; width:500px;">{{msg}}</div>-->
+<!--        </center>-->
+<!--    {% endif %}-->
+<!--{% endfor %}-->
+<!--{% endif %}-->
+<!--{% endwith %}-->
+
 {% block body %}
 <a href="/"><h3 style="color:white">Logout</h3></a>
     <center>
