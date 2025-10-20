@@ -1,4 +1,4 @@
-from flask import Flask,request,redirect,render_template,url_for,Blueprint,current_app,flash
+from flask import Flask,request,redirect,render_template,url_for,Blueprint,current_app,flash,session
 from taskdb import UserDB
 from werkzeug.security import generate_password_hash,check_password_hash
 
@@ -37,6 +37,7 @@ def login():
 
         user = t_db.get_email(email)
         if user and check_password_hash(user['pwd'],password):
+            session['user_id'] = user['id']
             flash('login successfully','success')
             return redirect(url_for('task'))
         else:

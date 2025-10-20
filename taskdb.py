@@ -14,8 +14,8 @@ class TaskDB:
         )
         self.dbcursor = self.db.cursor(dictionary=True)
 
-    def display_list(self, task_id):
-        self.dbcursor.execute('select * from tasks where id = %s order by date_time',(task_id,))
+    def display_list(self, user_id):
+        self.dbcursor.execute('select * from tasks where id = %s order by date_time',(user_id,))
         return self.dbcursor.fetchall()
     def add_list(self,enter_task):
         c_value = ('insert into tasks(tasks)values(%s)')

@@ -1,4 +1,4 @@
-from flask import Flask,request,redirect,render_template,url_for,flash, get_flashed_messages
+from flask import Flask,request,redirect,render_template,url_for,flash, get_flashed_messages, session
 from taskdb import TaskDB, UserDB
 from modify import modify
 from auth import auth
@@ -14,13 +14,13 @@ app.register_blueprint(auth, url_prefix='/')
 @app.route('/task',methods=['POST','GET'])
 def task():
     t_db = app.config['taskdb']
-    #print("FLASH DEBUG:", get_flashed_messages(with_categories=True))
+    user_id = session.get('user_id')
     if request.method == "POST":
         enter_task = request.form.get('content')
         t_db.add_list(enter_task)
         return redirect(url_for('task'))
     else:
-        view_list = t_db.display_list()
+        view_list = t_db.display_list(user_id)
         return render_template('main.html',view_list=view_list)
 
 if __name__ == "__main__":
