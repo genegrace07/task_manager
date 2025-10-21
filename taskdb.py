@@ -12,37 +12,61 @@ class TaskDB:
             password = os.getenv('db_password'),
             database = os.getenv('db_database')
         )
-        self.dbcursor = self.db.cursor(dictionary=True)
+        #self.dbcursor = self.db.cursor(dictionary=True)
 
     def display_list(self, user_id):
-        self.dbcursor.execute('select * from tasks where id = %s order by date_time',(user_id,))
-        return self.dbcursor.fetchall()
-    def add_list(self,enter_task):
-        c_value = ('insert into tasks(tasks)values(%s)')
-        self.dbcursor.execute(c_value,(enter_task,))
+        self.db.ping(reconnect=True)
+        cursor = self.db.cursor(dictionary=True,buffered=True)
+        c_value = 'select * from tasks where auth_id = %s'
+        cursor.execute(c_value,(user_id,))
+        result = cursor.fetchall()
+        cursor.close()
+        return result
+    def add_list(self,enter_task,user_id):
+        self.db.ping(reconnect=True)
+        cursor = self.db.cursor(dictionary=True, buffered=True)
+        c_value = ('insert into tasks(tasks,auth_id)values(%s,%s)')
+        cursor.execute(c_value,(enter_task,user_id,))
         self.db.commit()
+        cursor.close()
     def del_list(self,no):
+        self.db.ping(reconnect=True)
+        cursor = self.db.cursor(dictionary=True, buffered=True)
         c_value = ('delete from tasks where id = %s')
-        self.dbcursor.execute(c_value,(no,))
+        cursor.execute(c_value,(no,))
         self.db.commit()
+        cursor.close()
     def get_list(self,no):
+        self.db.ping(reconnect=True)
+        cursor = self.db.cursor(dictionary=True, buffered=True)
         c_value = ('select * from tasks where id = %s')
-        self.dbcursor.execute(c_value,(no,))
-        return self.dbcursor.fetchone()
+        cursor.execute(c_value,(no,))
+        result = cursor.fetchone()
+        cursor.close()
+        return result
     def update_list(self,task_name,no):
+        self.db.ping(reconnect=True)
+        cursor = self.db.cursor(dictionary=True, buffered=True)
         c_value = ('update tasks set tasks = %s where id = %s')
-        self.dbcursor.execute(c_value,(task_name,no))
+        cursor.execute(c_value,(task_name,no))
         self.db.commit()
-
+        cursor.close()
 class UserDB(TaskDB):
     def signing(self,user_name,passwd):
+        self.db.ping(reconnect=True)
+        cursor = self.db.cursor(dictionary=True, buffered=True)
         c_value = ('insert into auth(username,pwd) values(%s,%s)')
-        self.dbcursor.execute(c_value,(user_name,passwd))
+        cursor.execute(c_value,(user_name,passwd))
         self.db.commit()
+        cursor.close()
     def get_email(self,email):
+        self.db.ping(reconnect=True)
+        cursor = self.db.cursor(dictionary=True, buffered=True)
         c_value = 'select * from auth where username = %s'
-        self.dbcursor.execute(c_value,(email,))
-        return self.dbcursor.fetchone()
+        cursor.execute(c_value,(email,))
+        result = cursor.fetchone()
+        cursor.close()
+        return result
 
     # def log_in(self,email,password):
     #     c_value = 'select * from auth where username = %s and pwd = %s'

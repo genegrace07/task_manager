@@ -17,7 +17,7 @@ def task():
     user_id = session.get('user_id')
     if request.method == "POST":
         enter_task = request.form.get('content')
-        t_db.add_list(enter_task)
+        t_db.add_list(enter_task,user_id)
         return redirect(url_for('task'))
     else:
         view_list = t_db.display_list(user_id)

@@ -37,8 +37,8 @@ def login():
 
         user = t_db.get_email(email)
         if user and check_password_hash(user['pwd'],password):
-            session['user_id'] = user['id']
             flash('login successfully','success')
+            session['user_id'] = user['id']
             return redirect(url_for('task'))
         else:
             flash('Invalid login','error')
