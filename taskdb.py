@@ -67,8 +67,12 @@ class UserDB(TaskDB):
         result = cursor.fetchone()
         cursor.close()
         return result
+    def verify_email(self,verify):
+        self.db.ping(reconnect=True)
+        cursor = self.db.cursor(dictionary=True, buffered=True)
+        c_value = 'select username from auth where username = %s'
+        cursor.execute(c_value,(verify,))
+        result = cursor.fetchone()
+        cursor.close()
+        return result
 
-    # def log_in(self,email,password):
-    #     c_value = 'select * from auth where username = %s and pwd = %s'
-    #     self.dbcursor.execute(c_value,(email,password))
-    #     return self.dbcursor.fetchone()

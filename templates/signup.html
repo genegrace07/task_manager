@@ -10,9 +10,9 @@
 <table style="background-color:#3B444B;color:white">
     <tr><th><h1 align="left">Sign Up</h1></th></tr>
     <tr><td><h3><i>Please fill in this form to create an account!</i></h3></td></tr>
-<form action="/sign" method="POST">
+<form action="{{ url_for('auth.signup') }}" method="POST">
     <tr><td>
-    <input type="email" name="email" value="" placeholder=" Email" style="width:250px;height:30px;border-radius:10px;">
+    <input type="email" name="email" value="" placeholder=" Email" style="width:250px;height:30px;border-radius:10px;" autofocus>
     </td></tr>
     <tr><td>
     <input type="password" name="password" value="" placeholder=" Password" style="width:250px;height:30px;border-radius:10px;">

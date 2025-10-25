@@ -11,7 +11,10 @@ def signup():
         get_email = request.form.get('email')
         get_pass = request.form.get('password')
         get_confirm = request.form.get('confirm')
-        if len(get_email) == 0:
+        if t_db.verify_email(get_email):
+            flash('Username already is not available','error')
+            return redirect(url_for('auth.signup'))
+        elif len(get_email) == 0:
             flash('Email cannot be empty','error')
             return redirect(url_for('auth.signup'))
         elif len(get_pass) == 0:
@@ -45,4 +48,8 @@ def login():
             return render_template('login.html')
     else:
         return render_template('login.html')
+@auth.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('auth.login'))
 

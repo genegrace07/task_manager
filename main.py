@@ -15,9 +15,14 @@ app.register_blueprint(auth, url_prefix='/')
 def task():
     t_db = app.config['taskdb']
     user_id = session.get('user_id')
+    if not user_id:
+        flash('Invalid, Login first','error')
+        return redirect(url_for('auth.login'))
+
     if request.method == "POST":
         enter_task = request.form.get('content')
         t_db.add_list(enter_task,user_id)
+        flash('Successfully added','success')
         return redirect(url_for('task'))
     else:
         view_list = t_db.display_list(user_id)
@@ -26,3 +31,6 @@ def task():
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=False)
 
+'''
+email already exist
+'''
